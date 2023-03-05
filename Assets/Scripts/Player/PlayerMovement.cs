@@ -44,17 +44,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-       horizontalInput = Input.GetAxis("Horizontal");
-        float transfScaleX = Mathf.Abs(transform.localScale.x);
+        //PlayerInputMovement();
 
-        //flipping player while moving left to right
-        if (horizontalInput >= 0.01f || horizontalInput <= -0.01f)
-        {
-            transform.localScale = new Vector2(transfScaleX * Mathf.Sign(horizontalInput), transform.localScale.y);
-        }
 
-        //set Animator parameters
-        anim.SetBool("Run", horizontalInput != 0);
         anim.SetBool("IsGrounded", isGrounded());
 
         //Jump
@@ -75,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
         //    body.velocity = Vector2.zero;
         //}
         body.gravityScale = 5;
-        body.velocity = new Vector2(horizontalInput * speed,body.velocity.y);
+        body.velocity = new Vector2(speed, body.velocity.y);
+        anim.SetBool("Run", true);
 
         if (isGrounded())
         {
@@ -144,4 +137,22 @@ public class PlayerMovement : MonoBehaviour
     {
         return isGrounded() && horizontalInput == 0;
     }
+
+    public void PlayerInputMovement()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+        float transfScaleX = Mathf.Abs(transform.localScale.x);
+
+        //flipping player while moving left to right
+        if (horizontalInput >= 0.01f || horizontalInput <= -0.01f)
+        {
+            transform.localScale = new Vector2(transfScaleX * Mathf.Sign(horizontalInput), transform.localScale.y);
+        }
+
+        //set Animator parameters
+
+
+        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+    }
+
 }

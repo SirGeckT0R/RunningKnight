@@ -155,4 +155,19 @@ public class PlayerMovement : MonoBehaviour
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
     }
 
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag.Equals("Ground"))
+        {
+            Vector3 t = col.contacts[0].normal;
+            float angle = Vector3.Angle(t, Vector3.up);
+          
+            if (angle>89 && angle<91)
+            {
+                Debug.Log("Left");
+                enabled= false;
+            }
+        }
+    }
 }

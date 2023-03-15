@@ -1,23 +1,19 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 public class NewTileCreation : MonoBehaviour
 {
-    Tilemap tilemap;
+    private Tilemap tilemap;
+    [SerializeField] private GameObject player;
     [SerializeField] private Tile tile;
+    private const Tile DANGER_TILE = null;
 
     private int cameraTopPosition;
     private int cameraRightPosition;
 
-    private float previousRandomNumber=0;
-    private int locationOfNewTile;
-    private float timer;
-
     private float randomNumber = 0;
-    private float delay = 0;
 
     List<Vector3Int> positionsOfTiles= new List<Vector3Int>();
     List<Tile> tiles = new List<Tile>();
@@ -30,14 +26,22 @@ public class NewTileCreation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string debug = "";
-        for(int i = 0; i < positionsOfTiles.Count; i++)
+        if (player.transform.position.y < -6)
         {
-            debug+=positionsOfTiles[i].x + " ";
+            EditorApplication.isPlaying = false;
+            Application.Quit();
+         
         }
-        Debug.Log(debug);
+        //string debug = "";
+        //for(int i = 0; i < positionsOfTiles.Count; i++)
+        //{
+        //    debug+=positionsOfTiles[i].x + " ";
+        //}
+        //Debug.Log(debug);
+
+
         //getting position of where new tile should be planted and position of the one to be deleted
-        int cameraLeftPosition =(int)Camera.main.ViewportToWorldPoint(Vector3Int.left).x - 3;
+        int cameraLeftPosition = (int)Camera.main.ViewportToWorldPoint(Vector3Int.left).x - 3;
 
         cameraRightPosition = (int)Camera.main.ViewportToWorldPoint(Vector3Int.right).x + 3;
 
@@ -45,7 +49,7 @@ public class NewTileCreation : MonoBehaviour
         //deleting tiles out of view to the left of the camera
         for (int i = -2; i < cameraTopPosition; i++)
         {
-            tilemap.SetTile(tilemap.WorldToCell(new Vector3Int(cameraLeftPosition,i,0)), null);
+            tilemap.SetTile(tilemap.WorldToCell(new Vector3Int(cameraLeftPosition,i,0)), DANGER_TILE);
         }
 
         if (positionsOfTiles.Count <6)
@@ -54,12 +58,13 @@ public class NewTileCreation : MonoBehaviour
             tiles.Add(tile);
             return;
         }
-        if(positionsOfTiles.Count ==6) {
-            positionsOfTiles.Add(new Vector3Int(cameraRightPosition, -2, 0));
-            tiles.Add(null);
-            positionsOfTiles.Add(new Vector3Int(cameraRightPosition+1, -2, 0));
-            tiles.Add(null);
-        }
+
+        //if(positionsOfTiles.Count ==6) {
+        //    positionsOfTiles.Add(new Vector3Int(cameraRightPosition, -2, 0));
+        //    tiles.Add(DANGER_TILE);
+        //    positionsOfTiles.Add(new Vector3Int(cameraRightPosition+1, -2, 0));
+        //    tiles.Add(DANGER_TILE);
+        //}
 
 
         randomNumber = Random.Range(-1f, 1f);
@@ -68,12 +73,12 @@ public class NewTileCreation : MonoBehaviour
         //creating abyss of random length between 1 and 2 tiles
         if (randomNumber < 0 && !checkForAbyss())
         {
-            int length=Mathf.FloorToInt(Random.Range(1f, 2f));
+            int length=Mathf.FloorToInt(Random.Range(1f, 4f));
 
             for(int i = 0; i < length; i++)
             {
                 positionsOfTiles.Add(new Vector3Int(positionsOfTiles[positionsOfTiles.Count - 1].x +1+ i, -2, 0));
-                tiles.Add(null);
+                tiles.Add(DANGER_TILE);
             }
 
         }
@@ -83,17 +88,22 @@ public class NewTileCreation : MonoBehaviour
             tiles.Add(tile);
         }
 
-        tilemap.SetTile(tilemap.WorldToCell(positionsOfTiles[0]), tiles[0]);
-        positionsOfTiles.RemoveAt(0);
-        tiles.RemoveAt(0);
-       
+        if (!tilemap.HasTile(positionsOfTiles[0]) && positionsOfTiles[0].x <cameraRightPosition+6 )
+        {
+            tilemap.SetTile(tilemap.WorldToCell(positionsOfTiles[0]), tiles[0]);
+            positionsOfTiles.RemoveAt(0);
+            tiles.RemoveAt(0);
+
+        }
+
+
     }
 
     private bool checkForAbyss()
     {
-        bool bool1=tiles[tiles.Count - 1] == null;
-        bool bool2=tiles[tiles.Count - 2] == null;
+        bool bool1=tiles[tiles.Count - 1] == DANGER_TILE;
+        bool bool2=tiles[tiles.Count - 2] == DANGER_TILE;
 
-        return bool1 &&bool2;
+        return bool1 || bool2;
     }
 }

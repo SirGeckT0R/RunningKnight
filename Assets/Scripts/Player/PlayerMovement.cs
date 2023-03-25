@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
 
     private Rigidbody2D body;
+    private Health health;
     private Animator anim;
     private BoxCollider2D boxCollider;
     //private float wallJumpCooldown;
@@ -39,13 +40,17 @@ public class PlayerMovement : MonoBehaviour
         //getting references og rigidbody and animator
         body = GetComponent<Rigidbody2D>();   
         anim=GetComponent<Animator>();
-        boxCollider= GetComponent<BoxCollider2D>(); 
+        boxCollider= GetComponent<BoxCollider2D>();
+        health= GetComponent<Health>();
     }
 
     private void Update()
     {
         //PlayerInputMovement();
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            health.TakeDamage(1);
+        };
 
         anim.SetBool("IsGrounded", isGrounded());
 
@@ -160,10 +165,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.tag.Equals("Ground"))
         {
-            Vector3 t = col.contacts[0].normal;
-            float angle = Vector3.Angle(t, Vector3.up);
-          
-            if (angle>89 && angle<91)
+            Vector3 t = col.GetContact(0).normal;
+            float angle = Vector2.SignedAngle(t, Vector2.up);
+            if (angle>-91 && angle <-89)
             {
                 Debug.Log("Left");
                 enabled= false;

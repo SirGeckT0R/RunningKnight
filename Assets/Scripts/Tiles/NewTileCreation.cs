@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class NewTileCreation : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class NewTileCreation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (player.transform.position.y < -6)
         {
@@ -49,10 +50,11 @@ public class NewTileCreation : MonoBehaviour
         //deleting tiles out of view to the left of the camera
         for (int i = -2; i < cameraTopPosition; i++)
         {
-            tilemap.SetTile(tilemap.WorldToCell(new Vector3Int(cameraLeftPosition,i,0)), DANGER_TILE);
+            tilemap.SetTile(tilemap.WorldToCell(new Vector3Int(cameraLeftPosition,i,0)), null);
         }
 
-        if (positionsOfTiles.Count <6)
+
+        if (positionsOfTiles.Count <10)
         {
             positionsOfTiles.Add(new Vector3Int(cameraRightPosition, -2, 0));
             tiles.Add(tile);
@@ -67,17 +69,15 @@ public class NewTileCreation : MonoBehaviour
         //}
 
 
-        randomNumber = Random.Range(-1f, 1f);
-
-
+        randomNumber = Random.Range(-1f, 2f);
+     
         //creating abyss of random length between 1 and 2 tiles
         if (randomNumber < 0 && !checkForAbyss())
         {
-            int length=Mathf.FloorToInt(Random.Range(1f, 4f));
-
-            for(int i = 0; i < length; i++)
+            int length =Mathf.RoundToInt(Random.Range(2f, 3f));
+            for (int i = 0; i < length; i++)
             {
-                positionsOfTiles.Add(new Vector3Int(positionsOfTiles[positionsOfTiles.Count - 1].x +1+ i, -2, 0));
+                positionsOfTiles.Add(new Vector3Int(positionsOfTiles[positionsOfTiles.Count - 1].x+1, -2, 0));
                 tiles.Add(DANGER_TILE);
             }
 
@@ -88,8 +88,11 @@ public class NewTileCreation : MonoBehaviour
             tiles.Add(tile);
         }
 
-        if (!tilemap.HasTile(positionsOfTiles[0]) && positionsOfTiles[0].x <cameraRightPosition+6 )
+    
+
+        if (!tilemap.HasTile(positionsOfTiles[0]) && positionsOfTiles[0].x <cameraRightPosition +2)
         {
+       
             tilemap.SetTile(tilemap.WorldToCell(positionsOfTiles[0]), tiles[0]);
             positionsOfTiles.RemoveAt(0);
             tiles.RemoveAt(0);
@@ -101,9 +104,8 @@ public class NewTileCreation : MonoBehaviour
 
     private bool checkForAbyss()
     {
-        bool bool1=tiles[tiles.Count - 1] == DANGER_TILE;
+        bool bool1 = tiles[tiles.Count - 1] == DANGER_TILE;
         bool bool2=tiles[tiles.Count - 2] == DANGER_TILE;
-
         return bool1 || bool2;
     }
 }

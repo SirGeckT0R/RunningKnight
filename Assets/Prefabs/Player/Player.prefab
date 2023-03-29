@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af094e57e66af04fbfebbbb12b516b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 13
+  speed: 15
   jumpPower: 15
   coyoteTime: 0.6
   extraJumps: 0

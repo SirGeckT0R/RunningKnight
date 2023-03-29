@@ -247,10 +247,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dash_3: 3821791876570597701
       Dash_0: -7848039375673857549
       Dash_1: 1228786266525858794
       Dash_2: -8184982077848143418
+      Dash_3: 3821791876570597701
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

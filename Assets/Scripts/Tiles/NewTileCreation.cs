@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
@@ -10,6 +12,8 @@ public class NewTileCreation : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private Tile tile;
     private const Tile DANGER_TILE = null;
+
+    [SerializeField] private GameManager gameManager;
 
     private int cameraTopPosition;
     private int cameraRightPosition;
@@ -25,12 +29,11 @@ public class NewTileCreation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (player.transform.position.y < -6)
         {
-            EditorApplication.isPlaying = false;
-            Application.Quit();
+            gameManager.EndGame();
          
         }
         //string debug = "";

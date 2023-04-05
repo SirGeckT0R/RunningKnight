@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
             health.TakeDamage(1);
         };
 
-        anim.SetBool("IsGrounded", isGrounded());
 
         //Jump
         if (Input.GetKeyDown(KeyCode.Space))
@@ -73,7 +72,9 @@ public class PlayerMovement : MonoBehaviour
         //}
         body.gravityScale = 5;
         body.velocity = new Vector2(speed, body.velocity.y);
-        anim.SetBool("Run", true);
+
+        anim.SetInteger("AnimState", 1);
+        anim.SetBool("Grounded", isGrounded());
 
         if (isGrounded())
         {
@@ -100,18 +101,21 @@ public class PlayerMovement : MonoBehaviour
         //}
         if (isGrounded())
         {
+            anim.SetTrigger("Jump");
             body.velocity = new Vector2(body.velocity.x, jumpPower);
         }
         else
         {
             if(coyoteCounter > 0)
             {
+                anim.SetTrigger("Jump");
                 body.velocity = new Vector2(body.velocity.x, jumpPower);
             }
             else
             {
                 if(jumpCounter > 0)
                 {
+                    anim.SetTrigger("Jump");
                     body.velocity = new Vector2(body.velocity.x, jumpPower);
                     jumpCounter--;
                 }
@@ -161,17 +165,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag.Equals("Ground"))
-        {
-            Vector3 t = col.GetContact(0).normal;
-            float angle = Vector2.SignedAngle(t, Vector2.up);
-            if (angle>-91 && angle <-89)
-            {
-                Debug.Log("Left");
-                enabled= false;
-            }
-        }
-    }
+    //void OnCollisionEnter2D(Collision2D col)
+    //{
+    //    if (col.gameObject.tag.Equals("Ground"))
+    //    {
+    //        Vector3 t = col.GetContact(0).normal;
+    //        float angle = Vector2.SignedAngle(t, Vector2.up);
+    //        if (angle>-91 && angle <-89)
+    //        {
+    //            Debug.Log("Left");
+    //            enabled= false;
+    //        }
+    //    }
+    //}
 }

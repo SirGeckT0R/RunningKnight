@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Health : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class Health : MonoBehaviour
     private SpriteRenderer spriteRend;
 
     [Header("Components")]
-    [SerializeField] private Behaviour[] components;
+    [SerializeField] private Behaviour[] behaviours;
+    [SerializeField] private Rigidbody2D rigidbodyPlayer;
     private bool invulnerability;
 
     [Header("Hurt Sound")]
@@ -24,6 +26,7 @@ public class Health : MonoBehaviour
 
     [Header("Death Sound")]
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private GameManager gameManager;
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -41,7 +44,7 @@ public class Health : MonoBehaviour
 
         //player hurt
         if(currentHealth > 0) {
-            //anim.SetTrigger("Hurt");
+            anim.SetTrigger("Hurt");
             StartCoroutine(Invulnerability());
             //SoundManager.instance.PlaySound(hurtSound);
         }
@@ -50,15 +53,25 @@ public class Health : MonoBehaviour
         {
             if (!dead)
             { 
-                foreach(Behaviour comp in components)
+                foreach(Behaviour comp in behaviours)
                 {
                     comp.enabled = false;
                 }
+                if(rigidbodyPlayer!= null)
+                {
+                    rigidbodyPlayer.velocity = Vector2.zero;
+                }
+
 
                 //anim.SetBool("Grounded", true);
-                //anim.SetTrigger("Died");
+                anim.SetTrigger("Death");
 
                 dead = true;
+                if (this.gameObject.tag=="Player")
+                {
+                    Invoke("EndGame", 2f);
+                }
+                
                 //SoundManager.instance.PlaySound(deathSound);
 
             }
@@ -71,6 +84,10 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
 
+    void EndGame()
+    {
+        gameManager.EndGame();
+    }
 
     private IEnumerator Invulnerability()
     {
@@ -99,10 +116,5 @@ public class Health : MonoBehaviour
         anim.ResetTrigger("Died");
         anim.Play("Idle");
         StartCoroutine(Invulnerability());
-
-        foreach (Behaviour comp in components)
-        {
-            comp.enabled = true; ;
-        }
     }
 }

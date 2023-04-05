@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         if (gameHasEnded == false)
         {
             gameHasEnded = true;
-            GameOverUI.SetActive(true);
+            GameOverUI.SetActive(true); 
             Debug.Log("GAME OVER");
             score.SaveBestScore();
             Invoke("Restart", restartDelay);

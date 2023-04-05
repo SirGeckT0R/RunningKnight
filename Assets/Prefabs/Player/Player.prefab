@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6528371133643066317}
   - component: {fileID: 6528371133643066316}
   - component: {fileID: 6528371133643066306}
+  - component: {fileID: 3755636921457549563}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 6528371133643066315}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.17, y: 0.51, z: 0}
-  m_LocalScale: {x: 6.8108277, y: 6.8108277, z: 6.8108277}
+  m_LocalScale: {x: 2.37, y: 2.37, z: 2.37}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,18 +51,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009434171, y: 0.06486386}
+  m_Offset: {x: -0.044310465, y: 0.6839004}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4, y: 1.4}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 3.125, y: 1.71875}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2603081, y: 0.39021224}
+  m_Size: {x: 0.8500358, y: 1.2731804}
   m_EdgeRadius: 0
 --- !u!212 &6528371133643066313
 SpriteRenderer:
@@ -104,7 +105,7 @@ SpriteRenderer:
   m_SortingLayerID: -1853574643
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: 174209194dbf2fb44aef1ea1ba76a2f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,7 +147,7 @@ Animator:
   m_GameObject: {fileID: 6528371133643066315}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e1c7164662b448446984c0d8b3cd0b2e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3c2a5b7097b0fe44394328c0bdb9252e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -194,7 +195,29 @@ MonoBehaviour:
   startingHealth: 3
   iframeDuration: 1
   numberOfFlashes: 1
-  components:
-  - {fileID: 6528371133643066316}
+  behaviours: []
+  rigidbodyPlayer: {fileID: 0}
   hurtSound: {fileID: 0}
   deathSound: {fileID: 0}
+  gameManager: {fileID: 0}
+--- !u!114 &3755636921457549563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6528371133643066315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fea1cc46b864e41be8f1649ff04224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 1
+  range: 3
+  damage: 1
+  colliderDistance: 0.6
+  boxCollider: {fileID: 6528371133643066318}
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  attackSound: {fileID: 0}

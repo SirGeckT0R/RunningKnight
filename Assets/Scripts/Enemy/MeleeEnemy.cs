@@ -21,12 +21,9 @@ public class MeleeEnemy : MonoBehaviour
     private Animator anim;
     private Health playerHealth;
 
-    private EnemyPatrol enemyPatrol;
-
     private void Awake()
     {
-        anim = GetComponent<Animator>();
-        enemyPatrol=GetComponentInParent<EnemyPatrol>();    
+        anim = GetComponent<Animator>();  
     }
 
     private void Update()
@@ -39,16 +36,11 @@ public class MeleeEnemy : MonoBehaviour
             if (cooldownTimer >= attackCooldown && playerHealth.currentHealth > 0)
             {
                 cooldownTimer = 0;
-                DamagePlayer();
-                anim.SetTrigger("MeleeAttack");
+                anim.SetTrigger("Attack");
                 //SoundManager.instance.PlaySound(attackSound);
             }
         }
 
-        if(enemyPatrol != null)
-        {
-            enemyPatrol.enabled=!PlayerInSight();
-        }
     }
 
     private bool PlayerInSight()

@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -379,17 +379,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      oNdL0D2 - Imgur_0: 1027634181
-      oNdL0D2 - Imgur_1: -556332248
-      oNdL0D2 - Imgur_10: -1138726821
       oNdL0D2 - Imgur_11: -377716037
-      oNdL0D2 - Imgur_2: -1464563086
-      oNdL0D2 - Imgur_3: -65687960
-      oNdL0D2 - Imgur_4: -1854093792
+      oNdL0D2 - Imgur_0: 1027634181
       oNdL0D2 - Imgur_5: 1758299470
-      oNdL0D2 - Imgur_6: -761415602
+      oNdL0D2 - Imgur_3: -65687960
+      oNdL0D2 - Imgur_2: -1464563086
       oNdL0D2 - Imgur_7: 2068798080
       oNdL0D2 - Imgur_8: 879112099
+      oNdL0D2 - Imgur_1: -556332248
+      oNdL0D2 - Imgur_10: -1138726821
+      oNdL0D2 - Imgur_4: -1854093792
+      oNdL0D2 - Imgur_6: -761415602
       oNdL0D2 - Imgur_9: 2023123137
   spritePackingTag: 
   pSDRemoveMatte: 0

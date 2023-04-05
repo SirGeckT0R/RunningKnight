@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  jumpPower: 15
+  jumpPower: 20
   coyoteTime: 0.6
   extraJumps: 0
   groundLayer:
@@ -189,14 +189,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6528371133643066315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe70413a56dc0a44a7803b6123cbb91, type: 3}
+  m_Script: {fileID: 11500000, guid: 51f17e29d7f4f1649b003e6485590d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
   iframeDuration: 1
-  numberOfFlashes: 1
-  behaviours: []
-  rigidbodyPlayer: {fileID: 0}
+  numberOfFlashes: 2
+  behaviours:
+  - {fileID: 3755636921457549563}
+  - {fileID: 6528371133643066316}
   hurtSound: {fileID: 0}
   deathSound: {fileID: 0}
   gameManager: {fileID: 0}
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fea1cc46b864e41be8f1649ff04224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 1
+  attackCooldown: 0.5
   range: 3
   damage: 1
   colliderDistance: 0.6

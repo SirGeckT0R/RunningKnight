@@ -9,6 +9,7 @@ public class Score : MonoBehaviour
     [SerializeField] private DataManager dataManager;
     private TextMeshProUGUI text;
     public int score;
+    private int previousPosition;
 
     private void Awake()
     {
@@ -19,7 +20,13 @@ public class Score : MonoBehaviour
 
     private void Update()
     {
-        score = player.position.x < maxScore ? Mathf.FloorToInt(player.position.x) : maxScore;
+        int distanceTraveled = Mathf.FloorToInt(player.position.x) - previousPosition;
+        previousPosition = Mathf.FloorToInt(player.position.x);
+        score += distanceTraveled;
+        if(score >=maxScore)
+        {
+            score = maxScore;
+        }
         text.text = score.ToString();
     }
 
@@ -31,5 +38,10 @@ public class Score : MonoBehaviour
             dataManager.SetBestScore(score);
             dataManager.Save();
         }
+    }
+
+    public void addScore(int scorePoints)
+    {
+        score += scorePoints > 0 ? scorePoints : 0;
     }
 }

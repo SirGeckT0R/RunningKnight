@@ -40,4 +40,18 @@ public class SpawnManager : MonoBehaviour
             maxCooldown -= Time.deltaTime / 100;
         }
     }
+
+    public List<GameObject> getSpawnedObjects()
+    {
+        return spawned;
+    }
+
+    public void emptySpawnedList()
+    {
+        while (spawned.Count > 0)
+        {
+            Destroy(spawned[0]);
+            spawned.RemoveAt(0);
+        }
+    }
 }

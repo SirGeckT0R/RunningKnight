@@ -1,12 +1,15 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HealthEnemy : Health
 {
     [Header("Score Points")]
     [SerializeField] private int scorePoints;
     private Score scoreManager;
+
+
+    [Header("Bonuses")]
+    [SerializeField] private List<GameObject> bonuses;
     override public void TakeDamage(float _damage)
     {
         if(invulnerability)
@@ -33,12 +36,25 @@ public class HealthEnemy : Health
                 scoreManager = (Score)FindAnyObjectByType(typeof(Score));
                 //anim.SetBool("Grounded", true);
                 scoreManager.addScore(scorePoints);
+
+                DropBonus();
                 anim.SetTrigger("Death");
 
                 dead = true;
                 //SoundManager.instance.PlaySound(deathSound);
             }
 
+        }
+    }
+
+    private void DropBonus()
+    {
+        float random= Random.Range(-1f, 1f);
+        if(random> 0)
+        {
+            random = Random.Range(0, bonuses.Count);
+            GameObject spawn = Instantiate(bonuses[Mathf.FloorToInt(random)]);    
+            spawn.transform.position = gameObject.transform.position;
         }
     }
 }

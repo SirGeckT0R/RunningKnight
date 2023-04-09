@@ -154,6 +154,10 @@ MonoBehaviour:
   hurtSound: {fileID: 0}
   deathSound: {fileID: 0}
   scorePoints: 200
+  bonuses:
+  - {fileID: 7893166513085371744, guid: cf53d532d153fee4c91ba8cc95f10c3e, type: 3}
+  - {fileID: 7893166513085371744, guid: bbd08088e1e81a143a9c26cb757fd3ce, type: 3}
+  - {fileID: 7893166513085371744, guid: abebd6a85e6c56d4499ca88ac5296c0c, type: 3}
 --- !u!114 &5758521388943317318
 MonoBehaviour:
   m_ObjectHideFlags: 0

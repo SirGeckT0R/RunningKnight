@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainView.uss?fileID=7433441132597879392&amp;guid=8daa3cab44362004e9227e6325f10e26&amp;type=3#MainView" />
+    <ui:VisualElement name="background">
+        <ui:VisualElement name="main-container" style="height: 682px; width: 1204px; align-items: center;">
+            <ui:ListView focusable="true" name="character-list" show-border="false" horizontal-scrolling="false" style="align-items: stretch; justify-content: flex-start; flex-direction: row; flex-grow: 0; flex-basis: auto; flex-shrink: 1; flex-wrap: nowrap; width: 140px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

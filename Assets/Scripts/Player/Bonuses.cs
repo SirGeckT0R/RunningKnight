@@ -20,6 +20,8 @@ public class Bonuses : MonoBehaviour
     [SerializeField] protected int numberOfFlashes;
     private SpriteRenderer spriteRend;
 
+    [SerializeField] private BonusesVizualization ui;
+
     private int playerLayer;
     private int spikeLayer;
 
@@ -28,10 +30,10 @@ public class Bonuses : MonoBehaviour
         spriteRend= GetComponent<SpriteRenderer>();
         playerLayer = LayerMask.NameToLayer("Player");
         spikeLayer = LayerMask.NameToLayer("Spike");
+        ui.RefreshUIList();
     }
     private void Update()
     {
-            Debug.Log(collected.Count);
         if (Input.GetKeyDown(KeyCode.F) && collected.Count!=0){
             switch (collected[0])
             {
@@ -39,9 +41,11 @@ public class Bonuses : MonoBehaviour
                     SpawnManager spawnManager = (SpawnManager)FindAnyObjectByType(typeof(SpawnManager));
                     spawnManager.emptySpawnedList();
                     collected.RemoveAt(0);
+                    ui.RefreshUIList();
                     break;
                 case CollectibleTypes.SteelShoes:
                     collected.RemoveAt(0);
+                    ui.RefreshUIList();
                     StartCoroutine(InvulnerabilityFromSpikes());
                     break;
                 case CollectibleTypes.Default:
@@ -50,11 +54,17 @@ public class Bonuses : MonoBehaviour
         }
     }
 
+    public List<CollectibleTypes> getList()
+    {
+        return collected;
+    }
+
     public void AddBonus(CollectibleTypes type)
     {
         if(collected.Count < maxAmount)
         {
             collected.Add(type);
+            ui.RefreshUIList();
         }
     }
 

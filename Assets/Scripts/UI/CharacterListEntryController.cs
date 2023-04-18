@@ -1,4 +1,3 @@
-using UnityEditor.U2D.Animation;
 using UnityEngine.UIElements;
 
 public class CharacterListEntryController

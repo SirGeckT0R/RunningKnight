@@ -29,14 +29,14 @@ public class PlayerMelee : MonoBehaviour
     private void Update()
     {
         cooldownTimer += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !PauseMenu.GameIsPaused)
         {
 
             if (cooldownTimer >= attackCooldown)
             {
                 cooldownTimer = 0;
                 anim.SetTrigger("Attack3");
-                //SoundManager.instance.PlaySound(attackSound);
+                SoundManager.instance.PlaySound(attackSound);
             }
         }
 

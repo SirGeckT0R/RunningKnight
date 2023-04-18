@@ -22,7 +22,6 @@ public class HealthEnemy : Health
         if(currentHealth > 0) {
             anim.SetTrigger("Hurt");
             StartCoroutine(Invulnerability());
-            //SoundManager.instance.PlaySound(hurtSound);
         }
         //enemy died
         else
@@ -41,7 +40,7 @@ public class HealthEnemy : Health
                 anim.SetTrigger("Death");
 
                 dead = true;
-                //SoundManager.instance.PlaySound(deathSound);
+                SoundManager.instance.PlaySound(hurtSound);
             }
 
         }

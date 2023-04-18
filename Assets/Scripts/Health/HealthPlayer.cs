@@ -20,7 +20,7 @@ public class HealthPlayer : Health
         {
             anim.SetTrigger("Hurt");
             StartCoroutine(Invulnerability());
-            //SoundManager.instance.PlaySound(hurtSound);
+            SoundManager.instance.PlaySound(hurtSound);
         }
         //player died
         else
@@ -37,19 +37,13 @@ public class HealthPlayer : Health
 
                 //anim.SetBool("Grounded", true);
                 anim.SetTrigger("Death");
-
+                gameManager.PlayerDied();
                 dead = true;
-                Invoke("EndGame", 2f);
 
-                //SoundManager.instance.PlaySound(deathSound);
+                SoundManager.instance.PlaySound(deathSound);
 
             }
 
         }
-    }
-
-    private void EndGame()
-    {
-        gameManager.EndGame();
     }
 }

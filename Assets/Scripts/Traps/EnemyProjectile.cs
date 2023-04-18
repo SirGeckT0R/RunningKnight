@@ -10,6 +10,9 @@ public class EnemyProjectile : EnemyDamage
     //private Animator anim;
     private BoxCollider2D coll;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip hitSound;
+
     private bool hit;
     private void Awake()
     {
@@ -42,6 +45,7 @@ public class EnemyProjectile : EnemyDamage
     private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
+        SoundManager.instance.PlaySound(hitSound);
         base.OnTriggerEnter2D (collision);
         coll.enabled = false;
 

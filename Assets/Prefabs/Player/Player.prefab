@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   jumpPower: 20
+  MAX_SPEED: 25
   coyoteTime: 0.6
   extraJumps: 0
   groundLayer:
@@ -199,8 +200,8 @@ MonoBehaviour:
   behaviours:
   - {fileID: 3755636921457549563}
   - {fileID: 6528371133643066316}
-  hurtSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  hurtSound: {fileID: 8300000, guid: bf176c3360c40c6428f794b99ff5f24b, type: 3}
+  deathSound: {fileID: 8300000, guid: 8e26580e0f4b39b4abaf0b4016ca5e0a, type: 3}
   gameManager: {fileID: 0}
 --- !u!114 &3755636921457549563
 MonoBehaviour:
@@ -222,7 +223,7 @@ MonoBehaviour:
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 28bc990d9499bec48998949032324e8b, type: 3}
 --- !u!114 &3985877396859087103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,3 +240,5 @@ MonoBehaviour:
   collect: {fileID: 5466724169995959161, guid: bbd08088e1e81a143a9c26cb757fd3ce, type: 3}
   iframeDuration: 5
   numberOfFlashes: 1
+  lightningSound: {fileID: 8300000, guid: f0533d6183dc6ff4f8c26f31cd510838, type: 3}
+  steelShoeSound: {fileID: 0}

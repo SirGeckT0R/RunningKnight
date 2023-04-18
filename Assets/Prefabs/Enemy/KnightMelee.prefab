@@ -151,7 +151,7 @@ MonoBehaviour:
   numberOfFlashes: 0
   behaviours:
   - {fileID: 5758521388943317318}
-  hurtSound: {fileID: 0}
+  hurtSound: {fileID: 8300000, guid: bf176c3360c40c6428f794b99ff5f24b, type: 3}
   deathSound: {fileID: 0}
   scorePoints: 200
   bonuses:
@@ -178,4 +178,4 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 28bc990d9499bec48998949032324e8b, type: 3}

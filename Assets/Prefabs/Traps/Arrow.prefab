@@ -127,3 +127,4 @@ MonoBehaviour:
   damage: 1
   speed: 10
   resetTime: 3
+  hitSound: {fileID: 8300000, guid: 8bd1b13592336a94881abb2b26adccac, type: 3}

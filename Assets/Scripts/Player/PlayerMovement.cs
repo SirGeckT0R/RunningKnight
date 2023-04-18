@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [Header ("Movement Parameters")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
+    [SerializeField] private float MAX_SPEED;
 
     [Header("Coyote Time")]
     [SerializeField] private float coyoteTime;
@@ -15,10 +16,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int extraJumps;
     private int jumpCounter;
 
-    //[Header("Wall Jump")]
-    //[SerializeField] private float wallJumpX;
-    //[SerializeField] private float wallJumpY;
-
     [Header ("Layers")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
@@ -27,13 +24,11 @@ public class PlayerMovement : MonoBehaviour
     private Health health;
     private Animator anim;
     private BoxCollider2D boxCollider;
-    //private float wallJumpCooldown;
-   // private const float WALL_JUMP_POWER_X = 3;
-    //private const float WALL_JUMP_POWER_Y = 7;
     private float horizontalInput;
 
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
+    private bool hasGrounded=true;
 
     private void Awake()
     {
@@ -47,11 +42,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         //PlayerInputMovement();
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            health.TakeDamage(1);
-        };
-
 
         //Jump
         if (Input.GetKeyDown(KeyCode.Space))
@@ -65,16 +55,16 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, body.velocity.y / 2);
         }
 
-        //if (onWall())
-        //{
-        //    body.gravityScale = 0;
-        //    body.velocity = Vector2.zero;
-        //}
         body.gravityScale = 5;
         body.velocity = new Vector2(speed, body.velocity.y);
 
         anim.SetInteger("AnimState", 1);
-        anim.SetBool("Grounded", isGrounded());
+        if(hasGrounded== false && isGrounded()) {
+            SoundManager.instance.PlaySound(jumpSound);
+        }
+        hasGrounded = isGrounded();
+
+        anim.SetBool("Grounded", hasGrounded);
 
         if (isGrounded())
         {
@@ -85,6 +75,11 @@ public class PlayerMovement : MonoBehaviour
         {
             coyoteCounter -= Time.deltaTime;
         }
+
+        if (speed<MAX_SPEED)
+        {
+            speed += Time.deltaTime/10;
+        }
     }
 
     private void Jump()
@@ -94,14 +89,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-       // SoundManager.instance.PlaySound(jumpSound);
-        //if (onWall())
-        //{
-        //    WallJump();
-        //}
         if (isGrounded())
         {
             anim.SetTrigger("Jump");
+            SoundManager.instance.PlaySound(jumpSound);
             body.velocity = new Vector2(body.velocity.x, jumpPower);
         }
         else
@@ -125,22 +116,12 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    //private void WallJump()
-    //{
-    //    body.AddForce(new Vector2(-Mathf.Sign(transform.localScale.x) * WALL_JUMP_POWER_X, WALL_JUMP_POWER_Y));
-    //    wallJumpCooldown = 0;
-    //}
     private bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,boxCollider.bounds.size,0,Vector2.down,0.1f,groundLayer);
         return raycastHit.collider != null;
     }
 
-    //private bool onWall()
-    //{
-    //    RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
-    //    return raycastHit.collider != null;
-    //}
 
     public bool canAttack()
     {

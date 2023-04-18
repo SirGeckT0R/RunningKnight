@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Score score;
     public GameObject GameOverUI;
 
+    private AudioSource backgroundMusic;
+
     public void CompleteLevel()
     {
         GameOverUI.SetActive(true);
@@ -21,7 +23,6 @@ public class GameManager : MonoBehaviour
         {
             gameHasEnded = true;
             GameOverUI.SetActive(true); 
-            Debug.Log("GAME OVER");
             score.SaveBestScore();
             Invoke("Restart", restartDelay);
         }
@@ -30,6 +31,16 @@ public class GameManager : MonoBehaviour
     void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        backgroundMusic.Play();
     }
 
+    public void PlayerDied()
+    {
+        backgroundMusic=GameObject.Find("MusicSource").GetComponent<AudioSource>();
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.Stop();
+        }
+        Invoke("EndGame", 2f);
+    }
 }

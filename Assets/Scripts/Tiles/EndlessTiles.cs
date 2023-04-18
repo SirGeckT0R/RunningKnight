@@ -22,7 +22,7 @@ public class EndlessTiles : MonoBehaviour
     {
         if (player.transform.position.y < -6)
         {
-            EditorApplication.isPlaying = false;
+        //    EditorApplication.isPlaying = false;
             Application.Quit();
 
         }
@@ -31,7 +31,7 @@ public class EndlessTiles : MonoBehaviour
         //getting position of where new tile should be planted and position of the one to be deleted
         int cameraLeftPosition = (int)Camera.main.ViewportToWorldPoint(Vector3Int.left).x - 3;
 
-        cameraRightPosition = (int)Camera.main.ViewportToWorldPoint(Vector3Int.right).x + 1;
+        cameraRightPosition = (int)Camera.main.ViewportToWorldPoint(Vector3Int.right).x + 2;
 
 
         //deleting tiles out of view to the left of the camera

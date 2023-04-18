@@ -20,7 +20,10 @@ public class Bonuses : MonoBehaviour
     [SerializeField] protected int numberOfFlashes;
     private SpriteRenderer spriteRend;
 
-    [SerializeField] private BonusesVizualization ui;
+    private BonusesVizualization ui;
+    [Header("SFX")]
+    [SerializeField] private AudioClip lightningSound;
+    [SerializeField] private AudioClip steelShoeSound;
 
     private int playerLayer;
     private int spikeLayer;
@@ -30,7 +33,7 @@ public class Bonuses : MonoBehaviour
         spriteRend= GetComponent<SpriteRenderer>();
         playerLayer = LayerMask.NameToLayer("Player");
         spikeLayer = LayerMask.NameToLayer("Spike");
-        ui.RefreshUIList();
+        ui=GameObject.Find("Bonuses").GetComponent<BonusesVizualization>();
     }
     private void Update()
     {
@@ -39,12 +42,14 @@ public class Bonuses : MonoBehaviour
             {
                 case CollectibleTypes.Destruction:
                     SpawnManager spawnManager = (SpawnManager)FindAnyObjectByType(typeof(SpawnManager));
+                    SoundManager.instance.PlaySound(lightningSound);
                     spawnManager.emptySpawnedList();
                     collected.RemoveAt(0);
                     ui.RefreshUIList();
                     break;
                 case CollectibleTypes.SteelShoes:
                     collected.RemoveAt(0);
+                    SoundManager.instance.PlaySound(steelShoeSound);
                     ui.RefreshUIList();
                     StartCoroutine(InvulnerabilityFromSpikes());
                     break;
@@ -73,7 +78,7 @@ public class Bonuses : MonoBehaviour
         Physics2D.IgnoreLayerCollision(playerLayer, spikeLayer, true);
         for (int i = 0; i < numberOfFlashes; i++)
         {
-            spriteRend.color = new Color(0, 1, 0, 0.5f);
+            spriteRend.color = new Color(0.58f, 0.58f, 0.58f, 0.5f);
             yield return new WaitForSeconds(iframeDuration / (numberOfFlashes * 2));
             spriteRend.color = Color.white;
             yield return new WaitForSeconds(iframeDuration / (numberOfFlashes * 2));

@@ -8,6 +8,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpPower;
     [SerializeField] private float MAX_SPEED;
 
+
+    [Header("Roll parameters")]
+    [SerializeField] private float rollCooldown;
+    private float cooldownTimer = Mathf.Infinity;
+
     [Header("Coyote Time")]
     [SerializeField] private float coyoteTime;
     private float coyoteCounter;
@@ -21,9 +26,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
 
     private Rigidbody2D body;
-    private Health health;
     private Animator anim;
     private BoxCollider2D boxCollider;
+    private Vector2 baseSize;
+    private Vector2 baseOffset;
+    private Vector2 rollOffset;
+    private Vector2 rollSize;
     private float horizontalInput;
 
     [Header("SFX")]
@@ -36,7 +44,10 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();   
         anim=GetComponent<Animator>();
         boxCollider= GetComponent<BoxCollider2D>();
-        health= GetComponent<Health>();
+        baseSize = boxCollider.size;
+        baseOffset = boxCollider.offset;
+        rollOffset = new Vector2(boxCollider.offset.x, boxCollider.offset.y / 2);
+        rollSize = new Vector2(boxCollider.size.x, boxCollider.size.y / 2);
     }
 
     private void Update()
@@ -47,6 +58,15 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
+        }
+        cooldownTimer += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.C) && isGrounded())
+        {
+            if (cooldownTimer >= rollCooldown)
+            {
+                cooldownTimer = 0;
+                Roll();
+            }   
         }
 
         //Adjustable jump height
@@ -80,6 +100,19 @@ public class PlayerMovement : MonoBehaviour
         {
             speed += Time.deltaTime/10;
         }
+    }
+
+    private void Roll()
+    {
+        anim.SetTrigger("Roll");
+        boxCollider.size = rollSize;
+        boxCollider.offset = rollOffset;
+    }
+
+    private void StandUp()
+    {
+        boxCollider.size = baseSize;
+        boxCollider.offset = baseOffset;
     }
 
     private void Jump()

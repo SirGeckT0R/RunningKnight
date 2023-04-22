@@ -16,11 +16,12 @@ public class ArrowTrap : MonoBehaviour
         Attack();
     }
     private void Attack()
-    {
+    {   
         //cooldownTimer = 0;
 
         //SoundManager.instance.PlaySound(arrowSound);
-        arrow.transform.position =new Vector2(Camera.main.ViewportToWorldPoint(Vector3Int.right).x + 3,3);
+        int random = Mathf.RoundToInt(Random.Range(2f, 3f));
+        arrow.transform.position =new Vector2(Camera.main.ViewportToWorldPoint(Vector3Int.right).x + 3, random);
         arrow.GetComponent<EnemyProjectile>().ActivateProjectile();
     }
      

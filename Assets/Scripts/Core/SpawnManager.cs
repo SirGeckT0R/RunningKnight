@@ -30,7 +30,7 @@ public class SpawnManager : MonoBehaviour
             {
                 spawned.LastOrDefault().transform.position = new Vector2(cameraRightPosition, 0f);
             }
-            else if (obstacles[random].name == "KnightMelee")
+            else if (obstacles[random].name.Contains("KnightMelee"))
             {
                 spawned.LastOrDefault().transform.position = new Vector2(cameraRightPosition, 0.8f);
             }

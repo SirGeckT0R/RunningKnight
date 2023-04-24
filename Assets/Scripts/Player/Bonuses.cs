@@ -28,9 +28,12 @@ public class Bonuses : MonoBehaviour
     private int playerLayer;
     private int spikeLayer;
 
+
+    private GameManager gameManager;
     private void Awake()
     {
-        spriteRend= GetComponent<SpriteRenderer>();
+        gameManager =GameObject.Find("GameManager").GetComponent<GameManager>();
+        spriteRend = GetComponent<SpriteRenderer>();
         playerLayer = LayerMask.NameToLayer("Player");
         spikeLayer = LayerMask.NameToLayer("Spike");
         ui=GameObject.Find("Bonuses").GetComponent<BonusesVizualization>();
@@ -43,6 +46,7 @@ public class Bonuses : MonoBehaviour
                 case CollectibleTypes.Destruction:
                     SpawnManager spawnManager = (SpawnManager)FindAnyObjectByType(typeof(SpawnManager));
                     SoundManager.instance.PlaySound(lightningSound);
+                    GameObject.Find("GameManager").GetComponent<GameManager>().PlayLightningAnim();
                     spawnManager.emptySpawnedList();
                     collected.RemoveAt(0);
                     ui.RefreshUIList();

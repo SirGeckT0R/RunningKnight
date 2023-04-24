@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public float restartDelay = 2f;
     [SerializeField] private Score score;
     public GameObject GameOverUI;
+    [SerializeField] private GameObject lightningCanvas;
+
 
     private AudioSource backgroundMusic;
 
@@ -42,5 +44,14 @@ public class GameManager : MonoBehaviour
             backgroundMusic.Stop();
         }
         Invoke("EndGame", 2f);
+    }
+
+    public void PlayLightningAnim() {
+        lightningCanvas.SetActive(true);
+    }
+
+    public void StopLightningAnim()
+    {
+        lightningCanvas.SetActive(false);
     }
 }

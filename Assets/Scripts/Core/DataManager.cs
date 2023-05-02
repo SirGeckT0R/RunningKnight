@@ -69,7 +69,7 @@ public class DataManager : MonoBehaviour
     [System.Serializable]
     public class Data
     {
-        // The actual data we want to save goes here, for this example we'll only use an integer to represent the level
+        // The actual data we want to save goes here, for this example we'll only use an integer to represent best score
         public int bestScore = 0;
     }
 }

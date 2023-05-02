@@ -20,13 +20,6 @@ public class EndlessTiles : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (player.transform.position.y < -6)
-        {
-        //    EditorApplication.isPlaying = false;
-            Application.Quit();
-
-        }
-
 
         //getting position of where new tile should be planted and position of the one to be deleted
         int cameraLeftPosition = (int)Camera.main.ViewportToWorldPoint(Vector3Int.left).x - 3;

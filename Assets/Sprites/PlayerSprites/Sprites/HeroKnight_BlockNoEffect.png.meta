@@ -248,9 +248,9 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       HeroKnight_BlockNoEffect_0: 21300000
-      HeroKnight_BlockNoEffect_3: 21300006
-      HeroKnight_BlockNoEffect_2: 21300004
       HeroKnight_BlockNoEffect_1: 21300002
+      HeroKnight_BlockNoEffect_2: 21300004
+      HeroKnight_BlockNoEffect_3: 21300006
       HeroKnight_BlockNoEffect_4: 21300008
   spritePackingTag: 
   pSDRemoveMatte: 0

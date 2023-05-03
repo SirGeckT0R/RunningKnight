@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum CollectibleTypes
@@ -12,8 +13,8 @@ public class Bonuses : MonoBehaviour
 {
     [Header("Max Amount")]
     [SerializeField] private int maxAmount;
-    private List<CollectibleTypes> collected=new List<CollectibleTypes>();
-    [SerializeField] private Collectible collect;
+    private Queue<CollectibleTypes> collected=new Queue<CollectibleTypes>();
+    //[SerializeField] private Collectible collect;
 
     [Header("Iframes")]
     [SerializeField] protected float iframeDuration;
@@ -41,18 +42,16 @@ public class Bonuses : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && collected.Count!=0){
-            switch (collected[0])
+            switch (collected.Dequeue())
             {
                 case CollectibleTypes.Destruction:
                     SpawnManager spawnManager = (SpawnManager)FindAnyObjectByType(typeof(SpawnManager));
                     SoundManager.instance.PlaySound(lightningSound);
-                    GameObject.Find("GameManager").GetComponent<GameManager>().PlayLightningAnim();
+                    gameManager.PlayLightningAnim();
                     spawnManager.emptySpawnedList();
-                    collected.RemoveAt(0);
                     ui.RefreshUIList();
                     break;
                 case CollectibleTypes.SteelShoes:
-                    collected.RemoveAt(0);
                     SoundManager.instance.PlaySound(steelShoeSound);
                     ui.RefreshUIList();
                     StartCoroutine(InvulnerabilityFromSpikes());
@@ -65,14 +64,14 @@ public class Bonuses : MonoBehaviour
 
     public List<CollectibleTypes> getList()
     {
-        return collected;
+        return collected.ToList();
     }
 
     public void AddBonus(CollectibleTypes type)
     {
         if(collected.Count < maxAmount)
         {
-            collected.Add(type);
+            collected.Enqueue(type);
             ui.RefreshUIList();
         }
     }

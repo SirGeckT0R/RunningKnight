@@ -36,22 +36,20 @@ public class BonusesVizualization : MonoBehaviour
         }
         for(int i=0;i< imageList.Count;i++)
         {
-            if(i< toVisualize.Count)
+            imageBuffer = imageList[i].GetComponent<Image>();
+            if (i< toVisualize.Count)
             {
                 switch (toVisualize[i])
                 {
                     case CollectibleTypes.Destruction:
-                        imageBuffer = imageList[i].GetComponent<Image>();
                         imageBuffer.enabled = true;
                         imageBuffer.sprite = destructImage;
                         break;
                     case CollectibleTypes.SteelShoes:
-                        imageBuffer = imageList[i].GetComponent<Image>();
                         imageBuffer.enabled = true;
                         imageBuffer.sprite = steelShoesImage;
                         break;
                     case CollectibleTypes.Default:
-                        imageBuffer = imageList[i].GetComponent<Image>();
                         imageBuffer.enabled = false;
                         imageBuffer.sprite = null;
                         break;
@@ -59,7 +57,6 @@ public class BonusesVizualization : MonoBehaviour
             }
             else
             {
-                imageBuffer = imageList[i].GetComponent<Image>();
                 imageBuffer.enabled = false;
                 imageBuffer.sprite = null;
             }

@@ -367,16 +367,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HeroKnight_DeathNoBlood_1: 21300002
-      HeroKnight_DeathNoBlood_3: 21300006
-      HeroKnight_DeathNoBlood_7: 21300014
-      HeroKnight_DeathNoBlood_5: 21300010
       HeroKnight_DeathNoBlood_0: 21300000
+      HeroKnight_DeathNoBlood_1: 21300002
       HeroKnight_DeathNoBlood_2: 21300004
-      HeroKnight_DeathNoBlood_9: 21300018
-      HeroKnight_DeathNoBlood_6: 21300012
+      HeroKnight_DeathNoBlood_3: 21300006
       HeroKnight_DeathNoBlood_4: 21300008
+      HeroKnight_DeathNoBlood_5: 21300010
+      HeroKnight_DeathNoBlood_6: 21300012
+      HeroKnight_DeathNoBlood_7: 21300014
       HeroKnight_DeathNoBlood_8: 21300016
+      HeroKnight_DeathNoBlood_9: 21300018
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

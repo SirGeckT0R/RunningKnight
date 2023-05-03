@@ -225,8 +225,8 @@ TextureImporter:
     nameFileIdTable:
       EnvironmentTiles_0: 21300000
       EnvironmentTiles_1: 21300002
-      EnvironmentTiles_3: 21300006
       EnvironmentTiles_2: 21300004
+      EnvironmentTiles_3: 21300006
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

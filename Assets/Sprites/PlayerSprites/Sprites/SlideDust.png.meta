@@ -248,9 +248,9 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       SlideDust_0: 21300000
-      SlideDust_3: 21300006
       SlideDust_1: 21300002
       SlideDust_2: 21300004
+      SlideDust_3: 21300006
       SlideDust_4: 21300008
   spritePackingTag: 
   pSDRemoveMatte: 0

@@ -247,11 +247,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BlockFlash_1: 21300002
       BlockFlash_0: 21300000
+      BlockFlash_1: 21300002
       BlockFlash_2: 21300004
-      BlockFlash_4: 21300008
       BlockFlash_3: 21300006
+      BlockFlash_4: 21300008
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

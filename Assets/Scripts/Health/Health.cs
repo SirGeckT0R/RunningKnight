@@ -85,7 +85,6 @@ public abstract class Health : MonoBehaviour
     protected IEnumerator Invulnerability()
     {
         invulnerability= true;
-        Physics2D.IgnoreLayerCollision(7, 8, true);
         for(int i = 0;i < numberOfFlashes;i++)
         {
             spriteRend.color = new Color(1, 0, 0, 0.5f);
@@ -93,7 +92,6 @@ public abstract class Health : MonoBehaviour
             spriteRend.color = Color.white;
             yield return new WaitForSeconds(iframeDuration / (numberOfFlashes * 2));
         }
-        Physics2D.IgnoreLayerCollision(7, 8, false);
         invulnerability = false;
     }
 

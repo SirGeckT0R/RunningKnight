@@ -8,7 +8,7 @@ To achieve this goal, the following points were implemented:
 Rules:
 You endlessly move through the world and your goal is to get as further as you can. You need to avoid multiple traps and enemies on your path with the help of useful items you pick up as you go. As a character you can jump, slide, attack enemies with your sword and use items in your inventory.
 Controls:
-Space - Jump
-Left Mouse Button - Attack
-C - Slide
-F - Use item
+Space - Jump;
+Left Mouse Button - Attack;
+C - Slide;
+F - Use item.
